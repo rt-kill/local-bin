@@ -1,0 +1,3 @@
+#!/bin/sh
+
+amixer -D pulse sset Capture toggle && amixer get Capture | grep '\[off\]' && (notify-send "MIC switched OFF" && amixer -c 0 set 'Mic Mute-LED Mode' On) || (notify-send "MIC switched ON" && amixer -c 0 set 'Mic Mute-LED Mode' Off)

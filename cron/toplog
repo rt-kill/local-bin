@@ -1,0 +1,4 @@
+#!/bin/sh
+
+date >> $HOME/top.log
+top -b -d 5 | head -n 20 >> $HOME/top.log

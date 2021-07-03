@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# setters
+brightness=$(echo "$(</sys/class/backlight/intel_backlight/brightness)")
+
+# checks
+([ -z "$1" ] || [ -z "$2" ]) && exit 1
+[ "$2" -eq "$2" ] || exit 1
+
+# opperations
+[ "$1" = "-set" ] && brightness=$2
+[ "$1" = "-inc" ] && brightness=$(($brightness + $2))
+[ "$1" = "-dec" ] && brightness=$(($brightness - $2))
+
+# modify
+[ "$brightness" -le "0" ] && brightness="0"
+[ "$brightness" -ge "1060" ] && brightness="1060"
+
+# output
+sh -c "echo $brightness > /sys/class/backlight/intel_backlight/brightness"
